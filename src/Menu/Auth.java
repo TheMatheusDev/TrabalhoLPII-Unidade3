@@ -4,9 +4,28 @@ import java.util.HashMap;
 import java.util.Scanner;
 import Classes.Usuario;
 import Utils.LimparTela;
+import Exceptions.LoginException;
 
 public class Auth {
   private static Scanner scan = new Scanner(System.in);
+
+  private static Usuario validarLogin(HashMap<String, Usuario> usuarios, String email, String senha)
+      throws LoginException {
+    if (email == null || email.trim().isEmpty()) {
+      throw new LoginException("Email não pode estar vazio!");
+    }
+
+    if (senha == null || senha.trim().isEmpty()) {
+      throw new LoginException("Senha não pode estar vazia!");
+    }
+
+    Usuario usuario = usuarios.get(email);
+    if (usuario == null || !usuario.getSenha().equals(senha)) {
+      throw new LoginException("Email ou senha incorretos!");
+    }
+
+    return usuario;
+  }
 
   public static void Login(HashMap<String, Usuario> usuarios) {
     while (true) {
@@ -27,15 +46,15 @@ public class Auth {
           System.out.print("Digite sua senha: ");
           String senha = scan.nextLine();
 
-          Usuario usuario = usuarios.get(email);
-          if (usuario != null && usuario.getSenha().equals(senha)) {
+          try {
+            Usuario usuario = validarLogin(usuarios, email, senha);
             System.out.println("\nLogin realizado com sucesso!");
             System.out.println("Bem-vindo(a), " + usuario.getNome() + "!");
             System.out.println("\nPressione Enter para continuar...");
             scan.nextLine();
             Principal.menuPrincipal(usuario);
-          } else {
-            System.out.println("\nEmail ou senha incorretos!");
+          } catch (LoginException e) {
+            System.out.println("\nErro de login: " + e.getMessage());
             System.out.println("Pressione Enter para continuar...");
             scan.nextLine();
           }

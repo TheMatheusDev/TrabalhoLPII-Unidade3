@@ -145,3 +145,4 @@ O sistema oferece diferentes níveis de operações CRUD para cada entidade:
 
 - **`UsuarioJaMembroException`**: Tentativa de adicionar usuário já membro
 - **`EventoLotadoException`**: Inscrição em evento com capacidade esgotada
+- **`LoginException`**: Erros relacionados ao processo de autenticação
