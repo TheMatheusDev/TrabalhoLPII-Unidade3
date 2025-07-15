@@ -1,11 +1,10 @@
 package Menu;
 
-import java.util.Scanner;
+import App.App;
 import Classes.Usuario;
 import Utils.LimparTela;
 
 public class Principal {
-  private static Scanner scan = new Scanner(System.in);
 
   public static void menuPrincipal(Usuario usuarioLogado) {
     while (true) {
@@ -27,7 +26,7 @@ public class Principal {
       System.out.println("[0] Sair da Conta (Logout)");
       System.out.print("\nEscolha uma opção: ");
 
-      String escolha = scan.nextLine();
+      String escolha = App.scanner.nextLine();
       switch (escolha) {
         case "1":
           Feed.exibirFeedDeNoticias(usuarioLogado);

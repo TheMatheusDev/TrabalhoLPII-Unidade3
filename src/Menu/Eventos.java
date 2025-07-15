@@ -3,7 +3,7 @@ package Menu;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+import App.App;
 import Classes.Evento;
 import Classes.Grupo;
 import Classes.Local;
@@ -13,7 +13,6 @@ import Exceptions.EventoLotadoException;
 import Utils.LimparTela;
 
 public class Eventos {
-  private static Scanner scan = new Scanner(System.in);
 
   public static void verEventosGrupo(Usuario usuarioLogado, Grupo grupo) {
     Cargo cargoUsuario = grupo.getMembros().get(usuarioLogado.getId()).getCargo();
@@ -27,7 +26,7 @@ public class Eventos {
       if (grupo.getEventos().isEmpty()) {
         System.out.println("Nenhum evento encontrado neste grupo.");
         System.out.println("\nPressione Enter para voltar...");
-        scan.nextLine();
+        App.scanner.nextLine();
         return;
       }
 
@@ -50,8 +49,7 @@ public class Eventos {
       System.out.println("[0] Voltar");
       System.out.print("\nEscolha uma opção: ");
 
-      String escolha = scan.nextLine();
-
+      String escolha = App.scanner.nextLine();
       switch (escolha) {
         case "1":
           verDetalhesEvento(grupo);
@@ -64,14 +62,14 @@ public class Eventos {
             deletarEvento(grupo);
           } else {
             System.out.println("Opção inválida! Pressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
           }
           break;
         case "0":
           return;
         default:
           System.out.println("Opção inválida! Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
       }
     }
   }
@@ -86,7 +84,7 @@ public class Eventos {
       if (grupo.getEventos().isEmpty()) {
         System.out.println("Nenhum evento encontrado neste grupo.");
         System.out.println("\nPressione Enter para voltar...");
-        scan.nextLine();
+        App.scanner.nextLine();
         return;
       }
 
@@ -99,7 +97,7 @@ public class Eventos {
 
       System.out.println("\n[0] Voltar");
       System.out.print("\nDigite o ID do evento que deseja deletar: ");
-      String input = scan.nextLine();
+      String input = App.scanner.nextLine();
 
       if (input.equals("0")) {
         return;
@@ -119,14 +117,14 @@ public class Eventos {
         if (eventoEncontrado == null) {
           System.out.println("Evento não encontrado!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
 
         System.out.println("\nVocê tem certeza que deseja deletar o evento '" + eventoEncontrado.getTitulo() + "'?");
         System.out.println("Esta ação não pode ser desfeita.");
         System.out.print("Digite 'CONFIRMAR' para deletar ou qualquer outra coisa para cancelar: ");
-        String confirmacao = scan.nextLine();
+        String confirmacao = App.scanner.nextLine();
 
         if (confirmacao.equals("CONFIRMAR")) {
           grupo.removerEvento(eventoEncontrado);
@@ -139,7 +137,7 @@ public class Eventos {
       }
 
       System.out.println("Pressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
     }
   }
 
@@ -150,13 +148,13 @@ public class Eventos {
     System.out.println("=========================================");
 
     System.out.print("Título do evento: ");
-    String titulo = scan.nextLine();
+    String titulo = App.scanner.nextLine();
 
     System.out.print("Descrição do evento: ");
-    String descricao = scan.nextLine();
+    String descricao = App.scanner.nextLine();
 
     System.out.print("Data e hora (dd/MM/yyyy HH:mm): ");
-    String dataStr = scan.nextLine();
+    String dataStr = App.scanner.nextLine();
 
     LocalDateTime data;
     try {
@@ -164,34 +162,34 @@ public class Eventos {
     } catch (DateTimeParseException e) {
       System.out.println("Formato de data inválido!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
     System.out.print("Nome do local: ");
-    String nomeLocal = scan.nextLine();
+    String nomeLocal = App.scanner.nextLine();
 
     System.out.print("Endereço: ");
-    String endereco = scan.nextLine();
+    String endereco = App.scanner.nextLine();
 
     System.out.print("Cidade: ");
-    String cidade = scan.nextLine();
+    String cidade = App.scanner.nextLine();
 
     System.out.print("Capacidade máxima: ");
     int capacidade;
     try {
-      capacidade = Integer.parseInt(scan.nextLine());
+      capacidade = Integer.parseInt(App.scanner.nextLine());
     } catch (NumberFormatException e) {
       System.out.println("Capacidade inválida!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
     if (titulo.isEmpty() || descricao.isEmpty() || nomeLocal.isEmpty() || endereco.isEmpty() || cidade.isEmpty()) {
       System.out.println("Todos os campos são obrigatórios!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -201,7 +199,7 @@ public class Eventos {
 
     System.out.println("Evento criado com sucesso!");
     System.out.println("\nPressione Enter para continuar...");
-    scan.nextLine();
+    App.scanner.nextLine();
   }
 
   public static void verDetalhesEvento(Grupo grupo) {
@@ -219,7 +217,7 @@ public class Eventos {
 
       System.out.println("\n[0] Voltar");
       System.out.print("\nDigite o ID do evento para ver detalhes: ");
-      String input = scan.nextLine();
+      String input = App.scanner.nextLine();
 
       if (input.equals("0")) {
         return;
@@ -235,18 +233,18 @@ public class Eventos {
         if (evento == null) {
           System.out.println("Evento não encontrado!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
 
         LimparTela.limparTela();
         evento.exibirDetalhes();
         System.out.println("\nPressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
       } catch (NumberFormatException e) {
         System.out.println("ID inválido!");
         System.out.println("Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
       }
     }
   }
@@ -268,7 +266,7 @@ public class Eventos {
 
       System.out.println("\n[0] Voltar");
       System.out.print("\nDigite o ID do evento: ");
-      String input = scan.nextLine();
+      String input = App.scanner.nextLine();
 
       if (input.equals("0")) {
         return;
@@ -287,7 +285,7 @@ public class Eventos {
         if (evento == null) {
           System.out.println("Evento não encontrado!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
 
@@ -295,7 +293,7 @@ public class Eventos {
           evento.removerParticipante(usuarioLogado);
           System.out.println("Inscrição cancelada com sucesso!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           return;
         }
 
@@ -306,11 +304,11 @@ public class Eventos {
           System.out.println("Erro: " + e.getMessage());
         }
         System.out.println("Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
       } catch (NumberFormatException e) {
         System.out.println("ID inválido!");
         System.out.println("Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
       }
     }
   }

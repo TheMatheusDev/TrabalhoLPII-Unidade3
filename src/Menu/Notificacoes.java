@@ -1,14 +1,13 @@
 package Menu;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import App.App;
 import Classes.Grupo;
 import Classes.Notificacao;
 import Classes.Usuario;
 import Utils.LimparTela;
 
 public class Notificacoes {
-  private static Scanner scan = new Scanner(System.in);
 
   public static void menuNotificacoes(Usuario usuarioLogado) {
     while (true) {
@@ -21,7 +20,7 @@ public class Notificacoes {
         System.out.println("Você não tem notificações.");
         System.out.println("\n[0] Voltar ao menu principal");
         System.out.print("\nEscolha uma opção: ");
-        String opcao = scan.nextLine();
+        String opcao = App.scanner.nextLine();
 
         if (opcao.equals("0")) {
           return;
@@ -55,14 +54,13 @@ public class Notificacoes {
       System.out.println("[0] Voltar ao menu principal");
       System.out.print("\nEscolha uma opção: ");
 
-      String escolha = scan.nextLine();
-
+      String escolha = App.scanner.nextLine();
       switch (escolha) {
         case "1":
           usuarioLogado.marcarTodasNotificacoesComoLidas();
           System.out.println("Todas as notificações foram marcadas como lidas!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           break;
 
         case "2":
@@ -74,7 +72,7 @@ public class Notificacoes {
 
         default:
           System.out.println("Opção inválida! Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
       }
     }
   }
@@ -84,7 +82,7 @@ public class Notificacoes {
       return;
 
     System.out.print("Digite o número da notificação (1-" + usuarioLogado.getNotificacoes().size() + "): ");
-    String input = scan.nextLine();
+    String input = App.scanner.nextLine();
 
     int indice;
     try {
@@ -92,14 +90,14 @@ public class Notificacoes {
     } catch (NumberFormatException e) {
       System.out.println("Entrada inválida!");
       System.out.println("Pressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
     if (indice < 0 || indice >= usuarioLogado.getNotificacoes().size()) {
       System.out.println("Número inválido!");
       System.out.println("Pressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -108,7 +106,7 @@ public class Notificacoes {
     if (!grupo.getMembros().containsKey(usuarioLogado.getId())) {
       System.out.println("Você não é mais membro deste grupo!");
       System.out.println("Pressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
     notif.marcarComoLida();

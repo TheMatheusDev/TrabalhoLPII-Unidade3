@@ -1,13 +1,12 @@
 package Menu;
 
 import java.util.HashMap;
-import java.util.Scanner;
+import App.App;
 import Classes.Usuario;
 import Utils.LimparTela;
 import Exceptions.LoginException;
 
 public class Auth {
-  private static Scanner scan = new Scanner(System.in);
 
   private static Usuario validarLogin(HashMap<String, Usuario> usuarios, String email, String senha)
       throws LoginException {
@@ -37,26 +36,26 @@ public class Auth {
       System.out.println("[2] Criar Conta (Registrar-se)");
       System.out.println("[0] Sair");
       System.out.print("\nEscolha uma opção: ");
-      String escolha = scan.nextLine();
 
+      String escolha = App.scanner.nextLine();
       switch (escolha) {
         case "1":
           System.out.print("Digite seu email: ");
-          String email = scan.nextLine();
+          String email = App.scanner.nextLine();
           System.out.print("Digite sua senha: ");
-          String senha = scan.nextLine();
+          String senha = App.scanner.nextLine();
 
           try {
             Usuario usuario = validarLogin(usuarios, email, senha);
             System.out.println("\nLogin realizado com sucesso!");
             System.out.println("Bem-vindo(a), " + usuario.getNome() + "!");
             System.out.println("\nPressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
             Principal.menuPrincipal(usuario);
           } catch (LoginException e) {
             System.out.println("\nErro de login: " + e.getMessage());
             System.out.println("Pressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
           }
           break;
 
@@ -72,7 +71,7 @@ public class Auth {
         default:
           System.out.println("Opção inválida! Tente novamente.");
           System.out.println("\nPressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
       }
     }
   }
@@ -84,10 +83,10 @@ public class Auth {
     System.out.println("=========================================");
 
     System.out.print("Digite seu nome: ");
-    String nome = scan.nextLine();
+    String nome = App.scanner.nextLine();
 
     System.out.print("Digite seu email: ");
-    String email = scan.nextLine();
+    String email = App.scanner.nextLine();
 
     if (usuarios.containsKey(email)) {
       System.out.println("Email já cadastrado. Tente novamente.");
@@ -95,10 +94,10 @@ public class Auth {
     }
 
     System.out.print("Digite sua senha: ");
-    String senha = scan.nextLine();
+    String senha = App.scanner.nextLine();
 
     System.out.print("Digite sua cidade: ");
-    String cidade = scan.nextLine();
+    String cidade = App.scanner.nextLine();
 
     if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || cidade.isEmpty()) {
       System.out.println("Todos os campos são obrigatórios. Tente novamente.");
@@ -110,6 +109,6 @@ public class Auth {
 
     System.out.println("Conta criada com sucesso! Você já pode fazer login.");
     System.out.println("\nPressione Enter para continuar...");
-    scan.nextLine();
+    App.scanner.nextLine();
   }
 }

@@ -1,13 +1,12 @@
 package Menu;
 
-import java.util.Scanner;
+import App.App;
 import Classes.Grupo;
 import Classes.Membro;
 import Classes.Usuario;
 import Utils.LimparTela;
 
 public class ConfiguracaoNotificacoes {
-  private static Scanner scan = new Scanner(System.in);
 
   public static void configurarNotificacoesGrupo(Usuario usuarioLogado, Grupo grupo) {
     Membro membro = grupo.getMembros().get(usuarioLogado.getId());
@@ -31,9 +30,9 @@ public class ConfiguracaoNotificacoes {
       System.out.println("[4] Desabilitar todas as notificações");
       System.out.println("[5] Habilitar todas as notificações");
       System.out.println("[0] Voltar ao menu do grupo");
-
       System.out.print("\nEscolha uma opção: ");
-      String escolha = scan.nextLine();
+
+      String escolha = App.scanner.nextLine();
       switch (escolha) {
         case "1":
           membro.getConfiguracao().setReceberNotificacoesComentarios(!membro.recebeNotificacoesComentarios());
@@ -66,7 +65,7 @@ public class ConfiguracaoNotificacoes {
 
       if (!escolha.equals("0")) {
         System.out.println("Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
       }
     }
   }

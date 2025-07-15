@@ -1,6 +1,6 @@
 package Menu;
 
-import java.util.Scanner;
+import App.App;
 import Classes.Grupo;
 import Classes.Membro;
 import Classes.Usuario;
@@ -8,7 +8,6 @@ import Enums.Cargo;
 import Utils.LimparTela;
 
 public class Membros {
-  private static Scanner scan = new Scanner(System.in);
 
   public static void gerenciarMembros(Usuario usuarioLogado, Grupo grupo) {
     while (true) {
@@ -32,7 +31,7 @@ public class Membros {
       System.out.println("[0] Voltar");
       System.out.print("\nEscolha uma opção: ");
 
-      String escolha = scan.nextLine();
+      String escolha = App.scanner.nextLine();
       switch (escolha) {
         case "1":
           promoverMembro(grupo);
@@ -47,7 +46,7 @@ public class Membros {
           return;
         default:
           System.out.println("Opção inválida! Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
       }
     }
   }
@@ -74,7 +73,7 @@ public class Membros {
         System.out.println("Não há membros para promover.");
         System.out.println("\n[0] Voltar");
         System.out.print("\nEscolha uma opção: ");
-        String opcao = scan.nextLine();
+        String opcao = App.scanner.nextLine();
         if (opcao.equals("0"))
           return;
         continue;
@@ -82,7 +81,7 @@ public class Membros {
 
       System.out.println("\n[0] Voltar");
       System.out.print("\nDigite o ID do membro para promover: ");
-      String input = scan.nextLine();
+      String input = App.scanner.nextLine();
 
       if (input.equals("0")) {
         return;
@@ -102,14 +101,14 @@ public class Membros {
         if (membroEncontrado == null) {
           System.out.println("Membro não encontrado!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
 
         if (membroEncontrado.getCargo() != Cargo.MEMBRO) {
           System.out.println("Este usuário já é administrador!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
 
@@ -120,7 +119,7 @@ public class Membros {
       }
 
       System.out.println("Pressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
     }
   }
 
@@ -151,7 +150,7 @@ public class Membros {
         System.out.println("Não há administradores para rebaixar.");
         System.out.println("\n[0] Voltar");
         System.out.print("\nEscolha uma opção: ");
-        String opcao = scan.nextLine();
+        String opcao = App.scanner.nextLine();
         if (opcao.equals("0"))
           return;
         continue;
@@ -159,7 +158,7 @@ public class Membros {
 
       System.out.println("\n[0] Voltar");
       System.out.print("\nDigite o ID do admin para rebaixar: ");
-      String input = scan.nextLine();
+      String input = App.scanner.nextLine();
 
       if (input.equals("0"))
         return;
@@ -178,14 +177,14 @@ public class Membros {
         if (membroEncontrado == null) {
           System.out.println("Membro não encontrado!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
 
         if (membroEncontrado.getCargo() != Cargo.ADMIN) {
           System.out.println("Este usuário não é administrador!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
         membroEncontrado.setCargo(Cargo.MEMBRO);
@@ -195,7 +194,7 @@ public class Membros {
       }
 
       System.out.println("Pressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
     }
   }
 
@@ -221,7 +220,7 @@ public class Membros {
 
       System.out.println("\n[0] Voltar");
       System.out.print("\nDigite o ID do membro para remover: ");
-      String input = scan.nextLine();
+      String input = App.scanner.nextLine();
 
       if (input.equals("0"))
         return;
@@ -240,14 +239,14 @@ public class Membros {
         if (membroEncontrado == null) {
           System.out.println("Membro não encontrado!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
 
         if (membroEncontrado.getUsuario().getId() == usuarioLogado.getId()) {
           System.out.println("Você não pode remover a si mesmo do grupo!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
 
@@ -256,7 +255,7 @@ public class Membros {
         if (grupoFoiDeletado) {
           System.out.println("Grupo foi deletado pois não há mais membros!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           return;
         }
         System.out.println("Membro removido do grupo!");
@@ -264,7 +263,7 @@ public class Membros {
         System.out.println("ID inválido!");
       }
       System.out.println("Pressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
     }
   }
 }

@@ -1,6 +1,6 @@
 package Menu;
 
-import java.util.Scanner;
+import App.App;
 import Classes.Grupo;
 import Classes.Membro;
 import Classes.Notificacao;
@@ -11,7 +11,6 @@ import Recursos.*;
 import Utils.LimparTela;
 
 public class Recursos {
-  private static Scanner scan = new Scanner(System.in);
 
   public static void gerenciarBiblioteca(Usuario usuarioLogado, Grupo grupo) {
     Cargo cargoUsuario = grupo.getMembros().get(usuarioLogado.getId()).getCargo();
@@ -45,7 +44,7 @@ public class Recursos {
       System.out.println("[0] Voltar");
       System.out.print("\nEscolha uma opção: ");
 
-      String escolha = scan.nextLine();
+      String escolha = App.scanner.nextLine();
       switch (escolha) {
         case "1":
           verDetalhesRecurso(grupo);
@@ -56,7 +55,7 @@ public class Recursos {
           } else {
             System.out.println("Apenas administradores podem adicionar recursos!");
             System.out.println("Pressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
           }
           break;
         case "3":
@@ -65,14 +64,14 @@ public class Recursos {
           } else {
             System.out.println("Apenas administradores podem excluir recursos!");
             System.out.println("Pressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
           }
           break;
         case "0":
           return;
         default:
           System.out.println("Opção inválida! Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
       }
     }
   }
@@ -88,7 +87,7 @@ public class Recursos {
         System.out.println("Nenhum recurso na biblioteca!");
         System.out.println("\n[0] Voltar");
         System.out.print("\nEscolha uma opção: ");
-        String opcao = scan.nextLine();
+        String opcao = App.scanner.nextLine();
         if (opcao.equals("0")) {
           return;
         }
@@ -103,7 +102,7 @@ public class Recursos {
 
       System.out.println("\n[0] Voltar");
       System.out.print("\nDigite o número do recurso: ");
-      String input = scan.nextLine();
+      String input = App.scanner.nextLine();
 
       if (input.equals("0")) {
         return;
@@ -116,16 +115,16 @@ public class Recursos {
           RecursoCompartilhado recurso = grupo.getRecursos().get(indice);
           recurso.exibirDetalhes();
           System.out.println("\nPressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
         } else {
           System.out.println("Recurso não encontrado!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
         }
       } catch (NumberFormatException e) {
         System.out.println("Número inválido!");
         System.out.println("Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
       }
     }
   }
@@ -135,7 +134,7 @@ public class Recursos {
     if (cargoUsuario != Cargo.ADMIN) {
       System.out.println("Apenas administradores podem adicionar recursos à biblioteca!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -151,21 +150,21 @@ public class Recursos {
     System.out.println("[4] Série");
     System.out.println("[5] Jogo de Tabuleiro");
     System.out.print("\nEscolha o tipo: ");
-    String tipo = scan.nextLine();
+    String tipo = App.scanner.nextLine();
 
     System.out.print("Título: ");
-    String titulo = scan.nextLine();
+    String titulo = App.scanner.nextLine();
 
     System.out.print("Autor/Criador: ");
-    String autor = scan.nextLine();
+    String autor = App.scanner.nextLine();
 
     System.out.print("Descrição: ");
-    String descricao = scan.nextLine();
+    String descricao = App.scanner.nextLine();
 
     if (titulo.isEmpty() || autor.isEmpty() || descricao.isEmpty()) {
       System.out.println("Título, autor e descrição são obrigatórios!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -173,21 +172,21 @@ public class Recursos {
     switch (tipo) {
       case "1": // Livro
         System.out.print("Gênero: ");
-        String genero = scan.nextLine();
+        String genero = App.scanner.nextLine();
         recurso = new Livro(titulo, autor, descricao, genero);
         break;
 
       case "2": // Trilha
         System.out.print("Distância (km): ");
         try {
-          double distancia = Double.parseDouble(scan.nextLine());
+          double distancia = Double.parseDouble(App.scanner.nextLine());
           System.out.print("Dificuldade: ");
-          String dificuldade = scan.nextLine();
+          String dificuldade = App.scanner.nextLine();
           recurso = new Trilha(titulo, autor, descricao, distancia, dificuldade);
         } catch (NumberFormatException e) {
           System.out.println("Distância inválida!");
           System.out.println("\nPressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           return;
         }
         break;
@@ -195,14 +194,14 @@ public class Recursos {
       case "3": // Filme
         System.out.print("Ano: ");
         try {
-          int ano = Integer.parseInt(scan.nextLine());
+          int ano = Integer.parseInt(App.scanner.nextLine());
           System.out.print("Gênero: ");
-          String generoFilme = scan.nextLine();
+          String generoFilme = App.scanner.nextLine();
           recurso = new Filme(titulo, autor, descricao, ano, generoFilme);
         } catch (NumberFormatException e) {
           System.out.println("Ano inválido!");
           System.out.println("\nPressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           return;
         }
         break;
@@ -210,14 +209,14 @@ public class Recursos {
       case "4": // Série
         System.out.print("Número de temporadas: ");
         try {
-          int temporadas = Integer.parseInt(scan.nextLine());
+          int temporadas = Integer.parseInt(App.scanner.nextLine());
           System.out.print("Gênero: ");
-          String generoSerie = scan.nextLine();
+          String generoSerie = App.scanner.nextLine();
           recurso = new Serie(titulo, autor, descricao, temporadas, generoSerie);
         } catch (NumberFormatException e) {
           System.out.println("Número de temporadas inválido!");
           System.out.println("\nPressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           return;
         }
         break;
@@ -225,16 +224,16 @@ public class Recursos {
       case "5": // Jogo de Tabuleiro
         System.out.print("Jogadores mínimo: ");
         try {
-          int jogadoresMin = Integer.parseInt(scan.nextLine());
+          int jogadoresMin = Integer.parseInt(App.scanner.nextLine());
           System.out.print("Jogadores máximo: ");
-          int jogadoresMax = Integer.parseInt(scan.nextLine());
+          int jogadoresMax = Integer.parseInt(App.scanner.nextLine());
           System.out.print("Gênero: ");
-          String generoJogo = scan.nextLine();
+          String generoJogo = App.scanner.nextLine();
           recurso = new JogoDeTabuleiro(titulo, autor, descricao, jogadoresMin, jogadoresMax, generoJogo);
         } catch (NumberFormatException e) {
           System.out.println("Número de jogadores inválido!");
           System.out.println("\nPressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           return;
         }
         break;
@@ -242,7 +241,7 @@ public class Recursos {
       default:
         System.out.println("Tipo de recurso inválido!");
         System.out.println("\nPressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
         return;
     }
 
@@ -266,7 +265,7 @@ public class Recursos {
     }
 
     System.out.println("\nPressione Enter para continuar...");
-    scan.nextLine();
+    App.scanner.nextLine();
   }
 
   public static void excluirRecurso(Usuario usuarioLogado, Grupo grupo) {
@@ -274,7 +273,7 @@ public class Recursos {
     if (cargoUsuario != Cargo.ADMIN) {
       System.out.println("Apenas administradores podem excluir recursos da biblioteca!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -288,7 +287,7 @@ public class Recursos {
         System.out.println("Nenhum recurso na biblioteca para excluir!");
         System.out.println("\n[0] Voltar");
         System.out.print("\nEscolha uma opção: ");
-        String opcao = scan.nextLine();
+        String opcao = App.scanner.nextLine();
         if (opcao.equals("0")) {
           return;
         }
@@ -303,7 +302,7 @@ public class Recursos {
 
       System.out.println("\n[0] Voltar");
       System.out.print("\nDigite o número do recurso a excluir: ");
-      String input = scan.nextLine();
+      String input = App.scanner.nextLine();
 
       if (input.equals("0")) {
         return;
@@ -315,11 +314,11 @@ public class Recursos {
           RecursoCompartilhado recurso = grupo.getRecursos().get(indice);
 
           System.out.print("Tem certeza que deseja excluir '" + recurso.getTitulo() + "'? (s/N): ");
-          String confirmacao = scan.nextLine();
+          String confirmacao = App.scanner.nextLine();
           if (!confirmacao.equalsIgnoreCase("s") && !confirmacao.equalsIgnoreCase("sim")) {
             System.out.println("Operação cancelada!");
             System.out.println("\nPressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
             continue;
           }
 
@@ -341,17 +340,17 @@ public class Recursos {
           }
 
           System.out.println("\nPressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           return;
         }
 
         System.out.println("Recurso não encontrado!");
         System.out.println("Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
       } catch (NumberFormatException e) {
         System.out.println("Número inválido!");
         System.out.println("Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
       }
     }
   }

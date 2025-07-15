@@ -1,6 +1,5 @@
 package Menu;
 
-import java.util.Scanner;
 import App.App;
 import Classes.Grupo;
 import Classes.Usuario;
@@ -9,7 +8,6 @@ import Exceptions.UsuarioJaMembroException;
 import Utils.LimparTela;
 
 public class Grupos {
-  private static Scanner scan = new Scanner(System.in);
 
   public static void menuMeusGrupos(Usuario usuarioLogado) {
     while (true) {
@@ -35,8 +33,7 @@ public class Grupos {
       System.out.println("[0] Voltar ao menu principal");
       System.out.print("\nEscolha uma opção: ");
 
-      String escolha = scan.nextLine();
-
+      String escolha = App.scanner.nextLine();
       switch (escolha) {
         case "1":
           acessarGrupo(usuarioLogado);
@@ -51,7 +48,7 @@ public class Grupos {
           return;
         default:
           System.out.println("Opção inválida! Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
       }
     }
   }
@@ -68,7 +65,7 @@ public class Grupos {
         System.out.println("Nenhum grupo encontrado.");
         System.out.println("\n[0] Voltar ao menu principal");
         System.out.print("\nEscolha uma opção: ");
-        String opcao = scan.nextLine();
+        String opcao = App.scanner.nextLine();
         if (opcao.equals("0"))
           return;
         continue;
@@ -82,7 +79,7 @@ public class Grupos {
       System.out.println("==========================================");
       System.out.println("[0] Voltar ao menu principal");
       System.out.print("\nDigite o ID do grupo que deseja visualizar: ");
-      String grupoEscolhido = scan.nextLine();
+      String grupoEscolhido = App.scanner.nextLine();
 
       if (grupoEscolhido.equals("0"))
         return;
@@ -93,13 +90,13 @@ public class Grupos {
         if (!App.grupos.containsKey(idGrupoEscolhido)) {
           System.out.println("\nGrupo não encontrado!");
           System.out.println("Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
           continue;
         }
       } catch (NumberFormatException e) {
         System.out.println("\nID inválido!");
         System.out.println("Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
         continue;
       }
 
@@ -128,7 +125,7 @@ public class Grupos {
       System.out.println("[0] Voltar");
 
       System.out.print("\nEscolha uma opção: ");
-      String opcao = scan.nextLine();
+      String opcao = App.scanner.nextLine();
 
       switch (opcao) {
         case "1":
@@ -136,18 +133,18 @@ public class Grupos {
             grupo.adicionarMembro(usuarioLogado, Cargo.MEMBRO);
             System.out.println("\nVocê entrou no grupo: " + grupo.getNome());
             System.out.println("Pressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
           } catch (UsuarioJaMembroException e) {
             System.out.println("\nErro: " + e.getMessage());
             System.out.println("Pressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
           }
           break;
         case "0":
           return;
         default:
           System.out.println("Opção inválida! Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
       }
     }
   }
@@ -177,8 +174,7 @@ public class Grupos {
       System.out.println("[0] Voltar");
       System.out.print("\nEscolha uma opção: ");
 
-      String escolha = scan.nextLine();
-
+      String escolha = App.scanner.nextLine();
       switch (escolha) {
         case "1":
           Postagens.verPostagensGrupo(usuarioLogado, grupo);
@@ -200,7 +196,7 @@ public class Grupos {
             Eventos.criarEvento(usuarioLogado, grupo);
           } else {
             System.out.println("Opção inválida! Pressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
           }
           break;
         case "7":
@@ -208,7 +204,7 @@ public class Grupos {
             Membros.gerenciarMembros(usuarioLogado, grupo);
           } else {
             System.out.println("Opção inválida! Pressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
           }
           break;
         case "8":
@@ -216,14 +212,14 @@ public class Grupos {
             editarGrupo(grupo);
           } else {
             System.out.println("Opção inválida! Pressione Enter para continuar...");
-            scan.nextLine();
+            App.scanner.nextLine();
           }
           break;
         case "0":
           return;
         default:
           System.out.println("Opção inválida! Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
       }
     }
   }
@@ -235,18 +231,18 @@ public class Grupos {
     System.out.println("=========================================");
 
     System.out.print("Nome do grupo: ");
-    String nome = scan.nextLine();
+    String nome = App.scanner.nextLine();
 
     System.out.print("Tema do grupo: ");
-    String tema = scan.nextLine();
+    String tema = App.scanner.nextLine();
 
     System.out.print("Descrição do grupo: ");
-    String descricao = scan.nextLine();
+    String descricao = App.scanner.nextLine();
 
     if (nome.isEmpty() || tema.isEmpty() || descricao.isEmpty()) {
       System.out.println("Todos os campos são obrigatórios!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -262,7 +258,7 @@ public class Grupos {
     }
 
     System.out.println("\nPressione Enter para continuar...");
-    scan.nextLine();
+    App.scanner.nextLine();
   }
 
   public static void sairDoGrupo(Usuario usuarioLogado) {
@@ -274,7 +270,7 @@ public class Grupos {
     if (usuarioLogado.getGrupos().isEmpty()) {
       System.out.println("Você não está em nenhum grupo.");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -285,7 +281,7 @@ public class Grupos {
     }
 
     System.out.print("\nDigite o ID do grupo que deseja sair (0 para cancelar): ");
-    String grupoEscolhido = scan.nextLine();
+    String grupoEscolhido = App.scanner.nextLine();
 
     int idGrupoEscolhido;
     try {
@@ -295,14 +291,14 @@ public class Grupos {
     } catch (NumberFormatException e) {
       System.out.println("ID inválido!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
     if (!usuarioLogado.getGrupos().containsKey(idGrupoEscolhido)) {
       System.out.println("Grupo não encontrado.");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -317,7 +313,7 @@ public class Grupos {
     }
 
     System.out.println("\nPressione Enter para continuar...");
-    scan.nextLine();
+    App.scanner.nextLine();
   }
 
   public static void acessarGrupo(Usuario usuarioLogado) {
@@ -329,7 +325,7 @@ public class Grupos {
     if (usuarioLogado.getGrupos().isEmpty()) {
       System.out.println("Você não está em nenhum grupo.");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -340,7 +336,7 @@ public class Grupos {
     }
 
     System.out.print("\nDigite o ID do grupo que deseja acessar (0 para cancelar): ");
-    String grupoEscolhido = scan.nextLine();
+    String grupoEscolhido = App.scanner.nextLine();
 
     int idGrupoEscolhido;
     try {
@@ -350,14 +346,14 @@ public class Grupos {
     } catch (NumberFormatException e) {
       System.out.println("ID inválido!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
     if (!usuarioLogado.getGrupos().containsKey(idGrupoEscolhido)) {
       System.out.println("Grupo não encontrado.");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -377,25 +373,25 @@ public class Grupos {
     System.out.println("Descrição: " + grupo.getDescricao());
 
     System.out.print("\nNovo nome (Enter para manter atual): ");
-    String novoNome = scan.nextLine();
+    String novoNome = App.scanner.nextLine();
     if (!novoNome.isEmpty()) {
       grupo.setNome(novoNome);
     }
 
     System.out.print("Novo tema (Enter para manter atual): ");
-    String novoTema = scan.nextLine();
+    String novoTema = App.scanner.nextLine();
     if (!novoTema.isEmpty()) {
       grupo.setTema(novoTema);
     }
 
     System.out.print("Nova descrição (Enter para manter atual): ");
-    String novaDescricao = scan.nextLine();
+    String novaDescricao = App.scanner.nextLine();
     if (!novaDescricao.isEmpty()) {
       grupo.setDescricao(novaDescricao);
     }
 
     System.out.println("Grupo atualizado com sucesso!");
     System.out.println("\nPressione Enter para continuar...");
-    scan.nextLine();
+    App.scanner.nextLine();
   }
 }

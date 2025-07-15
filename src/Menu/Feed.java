@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import App.App;
 import Classes.Comentario;
 import Classes.Grupo;
 import Classes.Postagem;
@@ -12,7 +12,6 @@ import Classes.Usuario;
 import Utils.LimparTela;
 
 public class Feed {
-  private static Scanner scan = new Scanner(System.in);
 
   public static void exibirFeedDeNoticias(Usuario usuarioLogado) {
     while (true) {
@@ -26,14 +25,14 @@ public class Feed {
         System.out.println("Entre em grupos para ver postagens no seu feed!");
         System.out.println("\n[0] Voltar ao menu principal");
         System.out.print("\nEscolha uma opção: ");
-        String opcao = scan.nextLine();
+        String opcao = App.scanner.nextLine();
 
         if (opcao.equals("0")) {
           return;
         }
 
         System.out.println("Opção inválida! Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
         continue;
       }
 
@@ -47,14 +46,14 @@ public class Feed {
         System.out.println("Seja o primeiro a postar algo!");
         System.out.println("\n[0] Voltar ao menu principal");
         System.out.print("\nEscolha uma opção: ");
-        String opcao = scan.nextLine();
+        String opcao = App.scanner.nextLine();
 
         if (opcao.equals("0")) {
           return;
         }
 
         System.out.println("Opção inválida! Pressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
         continue;
       }
 
@@ -78,7 +77,7 @@ public class Feed {
       System.out.println("[2] Filtrar por grupo específico");
       System.out.println("[0] Voltar ao menu principal");
       System.out.print("\nEscolha uma opção: ");
-      String opcao = scan.nextLine();
+      String opcao = App.scanner.nextLine();
 
       switch (opcao) {
         case "1":
@@ -91,7 +90,7 @@ public class Feed {
           return;
         default:
           System.out.println("Opção inválida! Pressione Enter para continuar...");
-          scan.nextLine();
+          App.scanner.nextLine();
       }
     }
   }
@@ -110,8 +109,7 @@ public class Feed {
     }
 
     System.out.print("\nDigite o número da postagem (0 para cancelar): ");
-    String escolha = scan.nextLine();
-
+    String escolha = App.scanner.nextLine();
     int numeroPostagem;
     try {
       numeroPostagem = Integer.parseInt(escolha);
@@ -121,13 +119,13 @@ public class Feed {
       if (numeroPostagem < 1 || numeroPostagem > todasPostagens.size()) {
         System.out.println("Número de postagem inválido!");
         System.out.println("\nPressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
         return;
       }
     } catch (NumberFormatException e) {
       System.out.println("Número inválido!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -138,12 +136,12 @@ public class Feed {
     System.out.println("==============================\n");
 
     System.out.print("Digite seu comentário: ");
-    String textoComentario = scan.nextLine();
+    String textoComentario = App.scanner.nextLine();
 
     if (textoComentario.trim().isEmpty()) {
       System.out.println("Comentário não pode estar vazio!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
@@ -154,7 +152,7 @@ public class Feed {
 
     System.out.println("\nComentário adicionado com sucesso!");
     System.out.println("\nPressione Enter para continuar...");
-    scan.nextLine();
+    App.scanner.nextLine();
   }
 
   public static void filtrarPostagensPorGrupo(Usuario usuarioLogado) {
@@ -172,8 +170,7 @@ public class Feed {
     }
 
     System.out.print("\nDigite o número do grupo (0 para cancelar): ");
-    String escolha = scan.nextLine();
-
+    String escolha = App.scanner.nextLine();
     int numeroGrupo;
     try {
       numeroGrupo = Integer.parseInt(escolha);
@@ -183,13 +180,13 @@ public class Feed {
       if (numeroGrupo < 1 || numeroGrupo > grupos.size()) {
         System.out.println("Número de grupo inválido!");
         System.out.println("\nPressione Enter para continuar...");
-        scan.nextLine();
+        App.scanner.nextLine();
         return;
       }
     } catch (NumberFormatException e) {
       System.out.println("Número inválido!");
       System.out.println("\nPressione Enter para continuar...");
-      scan.nextLine();
+      App.scanner.nextLine();
       return;
     }
 
