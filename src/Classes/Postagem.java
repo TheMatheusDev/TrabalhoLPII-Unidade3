@@ -70,7 +70,7 @@ public class Postagem extends Conteudo implements Notificavel {
 
     for (Membro membro : grupo.getMembros().values()) {
       Usuario usuario = membro.getUsuario();
-      if (!usuario.getNome().equals(autorComentario)) {
+      if (!usuario.getNome().equals(autorComentario) && membro.recebeNotificacoesComentarios()) {
         Notificacao notificacao = new Notificacao(tituloNotificacao, mensagemNotificacao, TipoNotificacao.COMENTARIO,
             grupo);
         usuario.adicionarNotificacao(notificacao);

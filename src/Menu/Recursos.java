@@ -5,6 +5,7 @@ import Classes.Grupo;
 import Classes.Membro;
 import Classes.Notificacao;
 import Classes.Usuario;
+import Enums.Cargo;
 import Enums.TipoNotificacao;
 import Recursos.*;
 import Utils.LimparTela;
@@ -13,6 +14,8 @@ public class Recursos {
   private static Scanner scan = new Scanner(System.in);
 
   public static void gerenciarBiblioteca(Usuario usuarioLogado, Grupo grupo) {
+    Cargo cargoUsuario = grupo.getMembros().get(usuarioLogado.getId()).getCargo();
+
     while (true) {
       LimparTela.limparTela();
       System.out.println("=========================================");
@@ -31,7 +34,14 @@ public class Recursos {
 
       System.out.println("\n==========================================");
       System.out.println("\n[1] Ver detalhes de um recurso");
-      System.out.println("[2] Adicionar novo recurso");
+
+      if (cargoUsuario == Cargo.ADMIN) {
+        System.out.println("[2] Adicionar novo recurso (Admin)");
+        if (!grupo.getRecursos().isEmpty()) {
+          System.out.println("[3] Excluir recurso (Admin)");
+        }
+      }
+
       System.out.println("[0] Voltar");
       System.out.print("\nEscolha uma opção: ");
 
@@ -41,7 +51,22 @@ public class Recursos {
           verDetalhesRecurso(grupo);
           break;
         case "2":
-          adicionarRecurso(usuarioLogado, grupo);
+          if (cargoUsuario == Cargo.ADMIN) {
+            adicionarRecurso(usuarioLogado, grupo);
+          } else {
+            System.out.println("Apenas administradores podem adicionar recursos!");
+            System.out.println("Pressione Enter para continuar...");
+            scan.nextLine();
+          }
+          break;
+        case "3":
+          if (cargoUsuario == Cargo.ADMIN && !grupo.getRecursos().isEmpty()) {
+            excluirRecurso(usuarioLogado, grupo);
+          } else {
+            System.out.println("Apenas administradores podem excluir recursos!");
+            System.out.println("Pressione Enter para continuar...");
+            scan.nextLine();
+          }
           break;
         case "0":
           return;
@@ -106,6 +131,14 @@ public class Recursos {
   }
 
   public static void adicionarRecurso(Usuario usuarioLogado, Grupo grupo) {
+    Cargo cargoUsuario = grupo.getMembros().get(usuarioLogado.getId()).getCargo();
+    if (cargoUsuario != Cargo.ADMIN) {
+      System.out.println("Apenas administradores podem adicionar recursos à biblioteca!");
+      System.out.println("\nPressione Enter para continuar...");
+      scan.nextLine();
+      return;
+    }
+
     LimparTela.limparTela();
     System.out.println("=========================================");
     System.out.println("  ADICIONAR RECURSO À BIBLIOTECA");
@@ -234,5 +267,92 @@ public class Recursos {
 
     System.out.println("\nPressione Enter para continuar...");
     scan.nextLine();
+  }
+
+  public static void excluirRecurso(Usuario usuarioLogado, Grupo grupo) {
+    Cargo cargoUsuario = grupo.getMembros().get(usuarioLogado.getId()).getCargo();
+    if (cargoUsuario != Cargo.ADMIN) {
+      System.out.println("Apenas administradores podem excluir recursos da biblioteca!");
+      System.out.println("\nPressione Enter para continuar...");
+      scan.nextLine();
+      return;
+    }
+
+    while (true) {
+      LimparTela.limparTela();
+      System.out.println("=========================================");
+      System.out.println("  EXCLUIR RECURSO DA BIBLIOTECA");
+      System.out.println("=========================================");
+
+      if (grupo.getRecursos().isEmpty()) {
+        System.out.println("Nenhum recurso na biblioteca para excluir!");
+        System.out.println("\n[0] Voltar");
+        System.out.print("\nEscolha uma opção: ");
+        String opcao = scan.nextLine();
+        if (opcao.equals("0")) {
+          return;
+        }
+        continue;
+      }
+
+      System.out.println("Recursos disponíveis:");
+      for (int i = 0; i < grupo.getRecursos().size(); i++) {
+        RecursoCompartilhado recurso = grupo.getRecursos().get(i);
+        System.out.println("[" + (i + 1) + "] " + recurso.getTitulo() + " - " + recurso.getClass().getSimpleName());
+      }
+
+      System.out.println("\n[0] Voltar");
+      System.out.print("\nDigite o número do recurso a excluir: ");
+      String input = scan.nextLine();
+
+      if (input.equals("0")) {
+        return;
+      }
+
+      try {
+        int indice = Integer.parseInt(input) - 1;
+        if (indice >= 0 && indice < grupo.getRecursos().size()) {
+          RecursoCompartilhado recurso = grupo.getRecursos().get(indice);
+
+          System.out.print("Tem certeza que deseja excluir '" + recurso.getTitulo() + "'? (s/N): ");
+          String confirmacao = scan.nextLine();
+          if (!confirmacao.equalsIgnoreCase("s") && !confirmacao.equalsIgnoreCase("sim")) {
+            System.out.println("Operação cancelada!");
+            System.out.println("\nPressione Enter para continuar...");
+            scan.nextLine();
+            continue;
+          }
+
+          grupo.removerRecurso(recurso);
+          System.out.println("Recurso excluído da biblioteca com sucesso!");
+          String tituloNotificacao = "Recurso removido da biblioteca";
+          String tipoRecurso = recurso.getClass().getSimpleName();
+          String mensagemNotificacao = usuarioLogado.getNome() + " removeu '" + recurso.getTitulo() +
+              "' (" + tipoRecurso + ") da biblioteca do grupo " + grupo.getNome();
+
+          for (Membro membro : grupo.getMembros().values()) {
+            Usuario usuario = membro.getUsuario();
+            if (usuario.getId() != usuarioLogado.getId()) {
+              Notificacao notificacao = new Notificacao(tituloNotificacao, mensagemNotificacao,
+                  TipoNotificacao.RECURSO,
+                  grupo);
+              usuario.adicionarNotificacao(notificacao);
+            }
+          }
+
+          System.out.println("\nPressione Enter para continuar...");
+          scan.nextLine();
+          return;
+        }
+
+        System.out.println("Recurso não encontrado!");
+        System.out.println("Pressione Enter para continuar...");
+        scan.nextLine();
+      } catch (NumberFormatException e) {
+        System.out.println("Número inválido!");
+        System.out.println("Pressione Enter para continuar...");
+        scan.nextLine();
+      }
+    }
   }
 }

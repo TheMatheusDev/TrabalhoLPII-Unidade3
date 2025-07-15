@@ -36,7 +36,6 @@ public class Notificacoes {
         System.out.println("Todas as notificações foram lidas.\n");
       }
 
-      // exibe notificacao ordem cronologica
       System.out.println("==== SUAS NOTIFICAÇÕES ====");
       for (int i = 0; i < usuarioLogado.getNotificacoes().size(); i++) {
         Notificacao notif = usuarioLogado.getNotificacoes().get(i);

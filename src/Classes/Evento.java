@@ -112,8 +112,11 @@ public class Evento implements Notificavel {
 
     for (Membro membro : grupo.getMembros().values()) {
       Usuario usuario = membro.getUsuario();
-      Notificacao notificacao = new Notificacao(tituloNotificacao, mensagemNotificacao, TipoNotificacao.EVENTO, grupo);
-      usuario.adicionarNotificacao(notificacao);
+      if (membro.recebeNotificacoesEventos()) {
+        Notificacao notificacao = new Notificacao(tituloNotificacao, mensagemNotificacao, TipoNotificacao.EVENTO,
+            grupo);
+        usuario.adicionarNotificacao(notificacao);
+      }
     }
   }
 

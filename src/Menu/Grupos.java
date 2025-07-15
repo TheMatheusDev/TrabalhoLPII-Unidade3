@@ -8,9 +8,6 @@ import Enums.Cargo;
 import Exceptions.UsuarioJaMembroException;
 import Utils.LimparTela;
 
-/**
- * Classe responsável pelo gerenciamento de grupos
- */
 public class Grupos {
   private static Scanner scan = new Scanner(System.in);
 
@@ -111,7 +108,6 @@ public class Grupos {
     }
   }
 
-  // Método auxiliar para visualizar detalhes do grupo
   public static void visualizarDetalhesGrupo(Usuario usuarioLogado, Grupo grupo) {
     while (true) {
       LimparTela.limparTela();
@@ -156,7 +152,6 @@ public class Grupos {
     }
   }
 
-  // Menu principal do grupo
   public static void menuGrupo(Usuario usuarioLogado, Grupo grupo) {
     Cargo cargoUsuario = grupo.getMembros().get(usuarioLogado.getId()).getCargo();
 
@@ -171,11 +166,12 @@ public class Grupos {
       System.out.println("[2] Criar nova postagem");
       System.out.println("[3] Ver eventos do grupo");
       System.out.println("[4] Biblioteca de recursos");
+      System.out.println("[5] Configurar notificações");
 
       if (cargoUsuario == Cargo.ADMIN) {
-        System.out.println("[5] Criar evento (Admin)");
-        System.out.println("[6] Gerenciar membros (Admin)");
-        System.out.println("[7] Editar grupo (Admin)");
+        System.out.println("[6] Criar evento (Admin)");
+        System.out.println("[7] Gerenciar membros (Admin)");
+        System.out.println("[8] Editar grupo (Admin)");
       }
 
       System.out.println("[0] Voltar");
@@ -197,6 +193,9 @@ public class Grupos {
           Recursos.gerenciarBiblioteca(usuarioLogado, grupo);
           break;
         case "5":
+          ConfiguracaoNotificacoes.configurarNotificacoesGrupo(usuarioLogado, grupo);
+          break;
+        case "6":
           if (cargoUsuario == Cargo.ADMIN) {
             Eventos.criarEvento(usuarioLogado, grupo);
           } else {
@@ -204,7 +203,7 @@ public class Grupos {
             scan.nextLine();
           }
           break;
-        case "6":
+        case "7":
           if (cargoUsuario == Cargo.ADMIN) {
             Membros.gerenciarMembros(usuarioLogado, grupo);
           } else {
@@ -212,7 +211,7 @@ public class Grupos {
             scan.nextLine();
           }
           break;
-        case "7":
+        case "8":
           if (cargoUsuario == Cargo.ADMIN) {
             editarGrupo(grupo);
           } else {

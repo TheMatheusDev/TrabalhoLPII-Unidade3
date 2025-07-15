@@ -9,12 +9,14 @@ public class Membro {
   private Usuario usuario;
   private Cargo cargo;
   private LocalDate dataDeIngresso;
+  private ConfiguracaoMembro configuracao;
 
   public Membro(Usuario usuario, Cargo cargo) {
     this.id = ++contadorId;
     this.usuario = usuario;
     this.cargo = cargo;
     this.dataDeIngresso = LocalDate.now();
+    this.configuracao = new ConfiguracaoMembro(this);
   }
 
   public int getId() {
@@ -39,6 +41,28 @@ public class Membro {
 
   public LocalDate getDataDeIngresso() {
     return dataDeIngresso;
+  }
+
+  public ConfiguracaoMembro getConfiguracao() {
+    return configuracao;
+  }
+
+  public void configurarNotificacoes(boolean comentarios, boolean eventos, boolean postagens) {
+    this.configuracao.setReceberNotificacoesComentarios(comentarios);
+    this.configuracao.setReceberNotificacoesEventos(eventos);
+    this.configuracao.setReceberNotificacoesPostagens(postagens);
+  }
+
+  public boolean recebeNotificacoesComentarios() {
+    return this.configuracao.isReceberNotificacoesComentarios();
+  }
+
+  public boolean recebeNotificacoesEventos() {
+    return this.configuracao.isReceberNotificacoesEventos();
+  }
+
+  public boolean recebeNotificacoesPostagens() {
+    return this.configuracao.isReceberNotificacoesPostagens();
   }
 
 }
