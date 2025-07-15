@@ -1,7 +1,8 @@
-package App;
+package Utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import App.App;
 import Classes.Grupo;
 import Classes.Usuario;
 import Classes.Postagem;
