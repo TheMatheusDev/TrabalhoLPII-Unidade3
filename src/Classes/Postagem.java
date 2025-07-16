@@ -1,6 +1,8 @@
 package Classes;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import Interfaces.Notificavel;
 import Enums.TipoNotificacao;
 
@@ -8,7 +10,7 @@ public class Postagem extends Conteudo implements Notificavel {
   private String titulo;
   private int postagemID;
   private Grupo grupo;
-  private ArrayList<Comentario> comentarios;
+  private List<Comentario> comentarios;
   private int contadorComentarios = 1;
 
   public Postagem(String autor, String texto, String data, String titulo, Grupo grupo) {
@@ -26,7 +28,7 @@ public class Postagem extends Conteudo implements Notificavel {
     enviarNotificacao();
   }
 
-  public ArrayList<Comentario> getComentarios() {
+  public List<Comentario> getComentarios() {
     return comentarios;
   }
 

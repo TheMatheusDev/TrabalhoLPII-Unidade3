@@ -12,7 +12,6 @@ import Classes.Usuario;
 import Utils.LimparTela;
 
 public class Feed {
-
   public static void exibirFeedDeNoticias(Usuario usuarioLogado) {
     while (true) {
       LimparTela.limparTela();
@@ -64,7 +63,6 @@ public class Feed {
 
       System.out.println("📰 SUAS POSTAGENS RECENTES (" + todasPostagens.size() + "):");
       System.out.println("=========================================");
-
       for (int i = 0; i < todasPostagens.size(); i++) {
         Postagem postagem = todasPostagens.get(i);
         System.out.println("\n📝 POSTAGEM #" + (i + 1));
@@ -77,8 +75,8 @@ public class Feed {
       System.out.println("[2] Filtrar por grupo específico");
       System.out.println("[0] Voltar ao menu principal");
       System.out.print("\nEscolha uma opção: ");
-      String opcao = App.scanner.nextLine();
 
+      String opcao = App.scanner.nextLine();
       switch (opcao) {
         case "1":
           comentarPostagemFeed(usuarioLogado, todasPostagens);
@@ -130,11 +128,9 @@ public class Feed {
     }
 
     Postagem postagemEscolhida = todasPostagens.get(numeroPostagem - 1);
-
     System.out.println("==============================");
     postagemEscolhida.exibir();
     System.out.println("==============================\n");
-
     System.out.print("Digite seu comentário: ");
     String textoComentario = App.scanner.nextLine();
 

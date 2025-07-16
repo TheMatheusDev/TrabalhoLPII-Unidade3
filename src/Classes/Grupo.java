@@ -5,6 +5,7 @@ import Enums.Cargo;
 import Exceptions.UsuarioJaMembroException;
 import Recursos.RecursoCompartilhado;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Grupo {
@@ -14,9 +15,9 @@ public class Grupo {
   private String tema;
   private String descricao;
   private HashMap<Integer, Membro> membros;
-  private ArrayList<Postagem> postagens;
-  private ArrayList<Evento> eventos;
-  private ArrayList<RecursoCompartilhado> recursos;
+  private List<Postagem> postagens;
+  private List<Evento> eventos;
+  private List<RecursoCompartilhado> recursos;
   private int contadorPostagens = 1;
 
   public Grupo(String nome, String tema, String descricao) {
@@ -66,7 +67,7 @@ public class Grupo {
     return membros;
   }
 
-  public ArrayList<Postagem> getPostagens() {
+  public List<Postagem> getPostagens() {
     return postagens;
   }
 
@@ -93,7 +94,7 @@ public class Grupo {
     return false;
   }
 
-  public ArrayList<Evento> getEventos() {
+  public List<Evento> getEventos() {
     return eventos;
   }
 
@@ -106,7 +107,7 @@ public class Grupo {
     eventos.remove(evento);
   }
 
-  public ArrayList<RecursoCompartilhado> getRecursos() {
+  public List<RecursoCompartilhado> getRecursos() {
     return recursos;
   }
 

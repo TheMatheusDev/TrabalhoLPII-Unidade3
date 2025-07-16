@@ -6,6 +6,7 @@ import Enums.TipoNotificacao;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Evento implements Notificavel {
   private static int contadorId = 0;
@@ -14,7 +15,7 @@ public class Evento implements Notificavel {
   private LocalDateTime data;
   private Local local;
   private Grupo grupo;
-  private ArrayList<Usuario> participantes;
+  private List<Usuario> participantes;
   private int capacidadeMaxima;
   private String descricao;
 
@@ -61,7 +62,7 @@ public class Evento implements Notificavel {
     return grupo;
   }
 
-  public ArrayList<Usuario> getParticipantes() {
+  public List<Usuario> getParticipantes() {
     return participantes;
   }
 
