@@ -1,14 +1,13 @@
 package Menu;
 
-import java.util.HashMap;
 import App.App;
 import Classes.Usuario;
 import Utils.LimparTela;
 import Exceptions.LoginException;
+import java.util.Map;
 
 public class Auth {
-
-  private static Usuario validarLogin(HashMap<String, Usuario> usuarios, String email, String senha)
+  private static Usuario validarLogin(Map<String, Usuario> usuarios, String email, String senha)
       throws LoginException {
     if (email == null || email.trim().isEmpty()) {
       throw new LoginException("Email não pode estar vazio!");
@@ -26,7 +25,7 @@ public class Auth {
     return usuario;
   }
 
-  public static void Login(HashMap<String, Usuario> usuarios) {
+  public static void Login(Map<String, Usuario> usuarios) {
     while (true) {
       LimparTela.limparTela();
       System.out.println("=========================================");
@@ -76,7 +75,7 @@ public class Auth {
     }
   }
 
-  public static void menuCriarConta(HashMap<String, Usuario> usuarios) {
+  public static void menuCriarConta(Map<String, Usuario> usuarios) {
     LimparTela.limparTela();
     System.out.println("=========================================");
     System.out.println("  CRIAR CONTA - REDE SOCIAL DE HOBBIES  ");

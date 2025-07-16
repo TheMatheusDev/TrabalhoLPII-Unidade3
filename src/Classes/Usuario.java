@@ -1,9 +1,10 @@
 package Classes;
 
 import App.App;
+import java.util.Map;
 import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Usuario {
   private static int contadorId = 0;
@@ -59,8 +60,8 @@ public class Usuario {
     this.cidade = cidade;
   }
 
-  public HashMap<Integer, Grupo> getGrupos() {
-    HashMap<Integer, Grupo> gruposDoUsuario = new HashMap<>();
+  public Map<Integer, Grupo> getGrupos() {
+    Map<Integer, Grupo> gruposDoUsuario = new HashMap<>();
     for (Grupo grupo : App.grupos.values()) {
       if (grupo.getMembros().containsKey(this.id)) {
         gruposDoUsuario.put(grupo.getId(), grupo);

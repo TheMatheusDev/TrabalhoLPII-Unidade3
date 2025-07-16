@@ -6,6 +6,7 @@ import Exceptions.UsuarioJaMembroException;
 import Recursos.RecursoCompartilhado;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 
 public class Grupo {
@@ -14,7 +15,7 @@ public class Grupo {
   private String nome;
   private String tema;
   private String descricao;
-  private HashMap<Integer, Membro> membros;
+  private Map<Integer, Membro> membros;
   private List<Postagem> postagens;
   private List<Evento> eventos;
   private List<RecursoCompartilhado> recursos;
@@ -63,7 +64,7 @@ public class Grupo {
     this.descricao = descricao;
   }
 
-  public HashMap<Integer, Membro> getMembros() {
+  public Map<Integer, Membro> getMembros() {
     return membros;
   }
 
