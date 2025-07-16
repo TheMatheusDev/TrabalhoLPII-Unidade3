@@ -65,7 +65,6 @@ public class Feed {
       System.out.println("=========================================");
       for (int i = 0; i < todasPostagens.size(); i++) {
         Postagem postagem = todasPostagens.get(i);
-        System.out.println("\n📝 POSTAGEM #" + (i + 1));
         postagem.exibir();
         System.out.println("   📍 Grupo: " + postagem.getGrupo().getNome());
         System.out.println("   " + "─".repeat(50));
