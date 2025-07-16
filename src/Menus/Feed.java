@@ -61,12 +61,11 @@ public class Feed {
         return p2.getData().compareTo(p1.getData());
       });
 
-      System.out.println("📰 SUAS POSTAGENS RECENTES (" + todasPostagens.size() + "):");
+      System.out.println("SUAS POSTAGENS RECENTES (" + todasPostagens.size() + "):");
       System.out.println("=========================================");
       for (int i = 0; i < todasPostagens.size(); i++) {
         Postagem postagem = todasPostagens.get(i);
         postagem.exibir();
-        System.out.println("   📍 Grupo: " + postagem.getGrupo().getNome());
         System.out.println("   " + "─".repeat(50));
       }
 
