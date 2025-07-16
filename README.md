@@ -105,23 +105,27 @@ src/
 
 ### 🔄 Herança
 
+- **Conteudo**: Base para postagens e comentários com atributos comuns (autor, texto, data)
+- **RecursoCompartilhado**: Base para recursos da biblioteca com atributos comuns (título, autor, descrição)
+
 ```java
 Conteudo (Abstrata)
-├── Postagem
+├── Postagem (implementa Notificavel)
 └── Comentario
 
 RecursoCompartilhado (Abstrata)
 ├── Livro
 ├── Trilha
 ├── Filme
-├── JogoDeTabuleiro
-└── Serie
+├── Serie
+└── JogoDeTabuleiro
 ```
 
 ### 🎭 Polimorfismo
 
-- Método `exibirDetalhes()` implementado diferentemente para cada tipo de recurso
-- Lista polimórfica de `RecursoCompartilhado`
+- **Lista polimórfica**: `List<RecursoCompartilhado>` contém diferentes tipos (Livro, Filme, Trilha, etc.)
+- **Método `exibirDetalhes()`**: Comportamento específico para cada tipo de recurso
+- **Método `exibir()`**: Implementado diferentemente em `Postagem` e `Comentario`
 
 ### 🤝 Interfaces
 
