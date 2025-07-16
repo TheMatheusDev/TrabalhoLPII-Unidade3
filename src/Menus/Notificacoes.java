@@ -1,4 +1,4 @@
-package Menu;
+package Menus;
 
 import java.time.format.DateTimeFormatter;
 import App.App;

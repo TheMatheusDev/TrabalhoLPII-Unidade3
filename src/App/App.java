@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 import Classes.Grupo;
 import Classes.Usuario;
-import Menu.Auth;
-import Menu.Principal;
+import Menus.Auth;
+import Menus.Principal;
 import Utils.Demo;
 
 public class App {
