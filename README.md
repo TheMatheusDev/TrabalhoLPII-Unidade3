@@ -48,7 +48,7 @@ src/
 
 | Classe                 | Descrição                     | Atributos Principais                                                                                 |
 | ---------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `Usuario`              | Representação dos usuários    | id, nome, email, senha, cidade, notificacoes                                                         |
+| `Usuario`              | Representação dos usuários    | id, nome, email, senha, notificacoes                                                                 |
 | `Grupo`                | Comunidades de hobby          | id, nome, tema, descricao, membros, postagens                                                        |
 | `Membro`               | Relação usuário-grupo         | id, usuario, cargo, dataDeIngresso, configuracao                                                     |
 | `Evento`               | Eventos organizados           | id, titulo, data, local, capacidadeMaxima, grupo                                                     |

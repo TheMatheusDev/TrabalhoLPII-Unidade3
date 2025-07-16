@@ -12,11 +12,11 @@ import Exceptions.UsuarioJaMembroException;
 
 public class Demo {
   public static void popularDados() {
-    Usuario user1 = new Usuario("tt", "tt", "tt", "tt");
-    Usuario alice = new Usuario("Alice Silva", "alice@email.com", "123", "São Paulo");
-    Usuario bob = new Usuario("Bob Santos", "bob@email.com", "456", "Rio de Janeiro");
-    Usuario carol = new Usuario("Carol Lima", "carol@email.com", "789", "Belo Horizonte");
-    Usuario david = new Usuario("David Oliveira", "david@email.com", "101", "Porto Alegre");
+    Usuario user1 = new Usuario("tt", "tt", "tt");
+    Usuario alice = new Usuario("Alice Silva", "alice@email.com", "123");
+    Usuario bob = new Usuario("Bob Santos", "bob@email.com", "456");
+    Usuario carol = new Usuario("Carol Lima", "carol@email.com", "789");
+    Usuario david = new Usuario("David Oliveira", "david@email.com", "101");
 
     App.usuarios.put(user1.getEmail(), user1);
     App.usuarios.put(alice.getEmail(), alice);

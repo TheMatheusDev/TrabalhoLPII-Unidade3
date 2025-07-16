@@ -12,15 +12,13 @@ public class Usuario {
   private String nome;
   private String email;
   private String senha;
-  private String cidade;
   private List<Notificacao> notificacoes;
 
-  public Usuario(String nome, String email, String senha, String cidade) {
+  public Usuario(String nome, String email, String senha) {
     this.id = ++contadorId;
     this.nome = nome;
     this.email = email;
     this.senha = senha;
-    this.cidade = cidade;
     this.notificacoes = new ArrayList<>();
   }
 
@@ -50,14 +48,6 @@ public class Usuario {
 
   public void setSenha(String senha) {
     this.senha = senha;
-  }
-
-  public String getCidade() {
-    return this.cidade;
-  }
-
-  public void setCidade(String cidade) {
-    this.cidade = cidade;
   }
 
   public Map<Integer, Grupo> getGrupos() {

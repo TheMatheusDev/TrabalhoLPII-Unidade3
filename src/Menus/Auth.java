@@ -95,15 +95,12 @@ public class Auth {
     System.out.print("Digite sua senha: ");
     String senha = App.scanner.nextLine();
 
-    System.out.print("Digite sua cidade: ");
-    String cidade = App.scanner.nextLine();
-
-    if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || cidade.isEmpty()) {
+    if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
       System.out.println("Todos os campos são obrigatórios. Tente novamente.");
       return;
     }
 
-    Usuario novoUsuario = new Usuario(nome, email, senha, cidade);
+    Usuario novoUsuario = new Usuario(nome, email, senha);
     usuarios.put(email, novoUsuario);
 
     System.out.println("Conta criada com sucesso! Você já pode fazer login.");
