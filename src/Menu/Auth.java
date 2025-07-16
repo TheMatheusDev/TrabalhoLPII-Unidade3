@@ -25,7 +25,7 @@ public class Auth {
     return usuario;
   }
 
-  public static void Login(Map<String, Usuario> usuarios) {
+  public static Usuario Login(Map<String, Usuario> usuarios) {
     while (true) {
       LimparTela.limparTela();
       System.out.println("=========================================");
@@ -50,7 +50,7 @@ public class Auth {
             System.out.println("Bem-vindo(a), " + usuario.getNome() + "!");
             System.out.println("\nPressione Enter para continuar...");
             App.scanner.nextLine();
-            Principal.menuPrincipal(usuario);
+            return usuario;
           } catch (LoginException e) {
             System.out.println("\nErro de login: " + e.getMessage());
             System.out.println("Pressione Enter para continuar...");

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Classes.Grupo;
 import Classes.Usuario;
 import Menu.Auth;
+import Menu.Principal;
 import Utils.Demo;
 
 public class App {
@@ -15,6 +16,8 @@ public class App {
 
   public static void main(String[] args) {
     Demo.popularDados();
-    Auth.Login(App.usuarios);
+
+    Usuario usuarioLogado = Auth.Login(App.usuarios);
+    Principal.menuPrincipal(usuarioLogado);
   }
 }
