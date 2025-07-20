@@ -2,15 +2,9 @@ package Classes;
 
 public class Comentario extends Conteudo {
   private int comentarioID;
-  private int postagemID;
 
-  public Comentario(String autor, String texto, String data, int postagemID) {
+  public Comentario(String autor, String texto, String data) {
     super(autor, texto, data);
-    this.postagemID = postagemID;
-  }
-
-  public int getPostagemID() {
-    return postagemID;
   }
 
   public void setComentarioID(int comentarioID) {

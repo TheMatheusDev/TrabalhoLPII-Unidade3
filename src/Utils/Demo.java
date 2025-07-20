@@ -87,42 +87,42 @@ public class Demo {
 
       Comentario comentario1 = new Comentario(bob.getNome(),
           "Também li 1984 recentemente! Concordo totalmente, é impressionante como permanece atual.",
-          dataAtual, post1Livros.getPostagemID());
+          dataAtual);
       post1Livros.adicionarComentario(comentario1);
 
       Comentario comentario1b = new Comentario(carol.getNome(),
           "A parte sobre a manipulação da linguagem me deixou arrepiada. 'Novilíngua' é genial e aterrorizante.",
-          dataAtual, post1Livros.getPostagemID());
+          dataAtual);
       post1Livros.adicionarComentario(comentario1b);
 
       Comentario comentario1c = new Comentario(david.getNome(),
           "Orwell estava décadas à frente do seu tempo. Big Brother virou realidade em muitos aspectos.",
-          dataAtual, post1Livros.getPostagemID());
+          dataAtual);
       post1Livros.adicionarComentario(comentario1c);
 
       Comentario comentario2 = new Comentario(carol.getNome(),
           "Recomendo muito 'Fundação' do Asimov se ainda não leu. E 'Neuromancer' do William Gibson é obrigatório!",
-          dataAtual, post2Livros.getPostagemID());
+          dataAtual);
       post2Livros.adicionarComentario(comentario2);
 
       Comentario comentario3 = new Comentario(alice.getNome(),
           "Adorei a ideia do clube presencial! Se conseguir organizar, eu participo.",
-          dataAtual, post3Livros.getPostagemID());
+          dataAtual);
       post3Livros.adicionarComentario(comentario3);
 
       Comentario comentario4 = new Comentario(alice.getNome(),
           "Wingspan está na minha wishlist há meses! Agora vou comprar depois dessa review.",
-          dataAtual, post1Jogos.getPostagemID());
+          dataAtual);
       post1Jogos.adicionarComentario(comentario4);
 
       Comentario comentario5 = new Comentario(user1.getNome(),
           "Dune Parte 2 é espetacular mesmo! Villeneuve conseguiu adaptar o livro perfeitamente.",
-          dataAtual, post1Filmes.getPostagemID());
+          dataAtual);
       post1Filmes.adicionarComentario(comentario5);
 
       Comentario comentario5b = new Comentario(david.getNome(),
           "A trilha sonora do Hans Zimmer também está incrível! Complementa perfeitamente as cenas épicas.",
-          dataAtual, post1Filmes.getPostagemID());
+          dataAtual);
       post1Filmes.adicionarComentario(comentario5b);
 
     } catch (UsuarioJaMembroException e) {

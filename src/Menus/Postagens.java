@@ -122,8 +122,7 @@ public class Postagens {
     }
 
     String data = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-    Comentario novoComentario = new Comentario(usuarioLogado.getNome(), textoComentario, data,
-        postagemEscolhida.getPostagemID());
+    Comentario novoComentario = new Comentario(usuarioLogado.getNome(), textoComentario, data);
     postagemEscolhida.adicionarComentario(novoComentario);
 
     System.out.println("\nComentário adicionado com sucesso!");
