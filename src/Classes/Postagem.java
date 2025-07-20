@@ -14,9 +14,7 @@ public class Postagem extends Conteudo implements Notificavel {
   private int contadorComentarios = 1;
 
   public Postagem(String autor, String texto, String data, String titulo, Grupo grupo) {
-    this.autor = autor;
-    this.texto = texto;
-    this.data = data;
+    super(autor, texto, data);
     this.titulo = titulo;
     this.grupo = grupo;
     this.comentarios = new ArrayList<>();

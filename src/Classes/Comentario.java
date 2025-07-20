@@ -5,9 +5,7 @@ public class Comentario extends Conteudo {
   private int postagemID;
 
   public Comentario(String autor, String texto, String data, int postagemID) {
-    this.autor = autor;
-    this.texto = texto;
-    this.data = data;
+    super(autor, texto, data);
     this.postagemID = postagemID;
   }
 
