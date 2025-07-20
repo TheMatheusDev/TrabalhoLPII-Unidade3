@@ -5,9 +5,6 @@ public abstract class Conteudo {
   protected String texto;
   protected String data;
 
-  public Conteudo() {
-  }
-
   public Conteudo(String autor, String texto, String data) {
     this.autor = autor;
     this.texto = texto;
