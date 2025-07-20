@@ -47,12 +47,6 @@ public class Membro {
     return configuracao;
   }
 
-  public void configurarNotificacoes(boolean comentarios, boolean eventos, boolean postagens) {
-    this.configuracao.setReceberNotificacoesComentarios(comentarios);
-    this.configuracao.setReceberNotificacoesEventos(eventos);
-    this.configuracao.setReceberNotificacoesPostagens(postagens);
-  }
-
   public boolean recebeNotificacoesComentarios() {
     return this.configuracao.isReceberNotificacoesComentarios();
   }
