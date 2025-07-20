@@ -17,7 +17,11 @@ public class App {
   public static void main(String[] args) {
     Demo.popularDados();
 
-    Usuario usuarioLogado = Auth.Login(App.usuarios);
-    Principal.menuPrincipal(usuarioLogado);
+    while (true) {
+      Usuario usuarioLogado = Auth.Login(App.usuarios);
+      if (usuarioLogado != null) {
+        Principal.menuPrincipal(usuarioLogado);
+      }
+    }
   }
 }
